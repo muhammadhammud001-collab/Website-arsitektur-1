@@ -1,0 +1,6 @@
+{
+  "name": "Horizon Studio",
+  "description": "Biro arsitektur dan tata ruang yang menghadirkan desain hunian tropis, bangunan komersial, ruang publik, serta manajemen konstruksi presisi di Indonesia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
