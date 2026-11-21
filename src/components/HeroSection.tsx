@@ -108,19 +108,16 @@ export function HeroSection({ onStartProject }: HeroSectionProps) {
             transition={{ duration: 0.62, delay: 0.44, ease: EASE_EDITORIAL }}
             className="mt-7 sm:mt-8 flex justify-center"
           >
-            <motion.button
+            <button
               type="button"
               onClick={onStartProject}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.985 }}
-              transition={{ duration: 0.2, ease: EASE_EDITORIAL }}
-              className="group inline-flex items-center gap-3 min-h-[46px] pl-6 pr-2 py-2 rounded-full bg-neutral-950 text-white text-sm font-medium hover:bg-neutral-800 transition-colors duration-150 whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
+              className="group inline-flex items-center gap-3 min-h-[46px] pl-6 pr-2 py-2 rounded-full bg-neutral-950 text-white text-sm font-medium hover:bg-neutral-800 hover:scale-[1.02] active:scale-[0.97] transition-all duration-150 whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
             >
               <span>Mulai Konsultasi</span>
               <span className="w-8 h-8 rounded-full bg-white text-neutral-950 flex items-center justify-center transition-transform duration-150 group-hover:translate-x-0.5">
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </span>
-            </motion.button>
+            </button>
           </motion.div>
         </div>
 

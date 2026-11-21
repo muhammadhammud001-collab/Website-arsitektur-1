@@ -1,6 +1,7 @@
-import { useRef } from 'react';
+import { type MouseEvent, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ASSETS } from '../data/studioData';
+import { scrollToSection } from '../utils/navigation';
 import { StaggerGroup, StaggerItem } from './MotionPrimitives';
 import { SafeImage } from './SafeImage';
 
@@ -14,6 +15,11 @@ export function FooterSection() {
   // Ultra-subtle atmospheric settle on skyline as user reaches page bottom
   const skylineScale = useTransform(scrollYProgress, [0, 1], [1.05, 1]);
   const skylineY = useTransform(scrollYProgress, [0, 1], [14, 0]);
+
+  const handleAnchorClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault();
+    scrollToSection(href);
+  };
 
   return (
     <footer
@@ -35,7 +41,8 @@ export function FooterSection() {
             <div>
               <a
                 href="#hero"
-                className="inline-block border border-neutral-300/90 bg-white/70 px-3.5 py-1.5 font-serif text-sm tracking-[0.14em] text-neutral-900 hover:border-neutral-900 transition-colors"
+                onClick={(e) => handleAnchorClick(e, '#hero')}
+                className="inline-block border border-neutral-300/90 bg-white/70 px-3.5 py-1.5 font-serif text-sm tracking-[0.14em] text-neutral-900 hover:border-neutral-900 active:scale-95 transition-all"
               >
                 HORIZON
               </a>
@@ -54,22 +61,38 @@ export function FooterSection() {
               <h2 className="text-sm font-normal text-neutral-400 mb-3.5 sm:mb-4">Navigasi</h2>
               <ul className="space-y-2.5 text-sm text-neutral-700">
                 <li>
-                  <a href="#about" className="inline-block py-0.5 hover:text-neutral-950 transition-colors">
+                  <a
+                    href="#about"
+                    onClick={(e) => handleAnchorClick(e, '#about')}
+                    className="inline-block py-0.5 hover:text-neutral-950 transition-colors"
+                  >
                     Tentang
                   </a>
                 </li>
                 <li>
-                  <a href="#portfolio" className="inline-block py-0.5 hover:text-neutral-950 transition-colors">
+                  <a
+                    href="#portfolio"
+                    onClick={(e) => handleAnchorClick(e, '#portfolio')}
+                    className="inline-block py-0.5 hover:text-neutral-950 transition-colors"
+                  >
                     Portofolio
                   </a>
                 </li>
                 <li>
-                  <a href="#services" className="inline-block py-0.5 hover:text-neutral-950 transition-colors">
+                  <a
+                    href="#services"
+                    onClick={(e) => handleAnchorClick(e, '#services')}
+                    className="inline-block py-0.5 hover:text-neutral-950 transition-colors"
+                  >
                     Layanan
                   </a>
                 </li>
                 <li>
-                  <a href="#blog" className="inline-block py-0.5 hover:text-neutral-950 transition-colors">
+                  <a
+                    href="#blog"
+                    onClick={(e) => handleAnchorClick(e, '#blog')}
+                    className="inline-block py-0.5 hover:text-neutral-950 transition-colors"
+                  >
                     Jurnal
                   </a>
                 </li>
@@ -90,7 +113,11 @@ export function FooterSection() {
                   </a>
                 </li>
                 <li>
-                  <a href="#contact" className="inline-block py-0.5 hover:text-neutral-950 transition-colors">
+                  <a
+                    href="#contact"
+                    onClick={(e) => handleAnchorClick(e, '#contact')}
+                    className="inline-block py-0.5 hover:text-neutral-950 transition-colors"
+                  >
                     Kontak
                   </a>
                 </li>

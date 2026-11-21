@@ -16,10 +16,16 @@
     text-wrap: balance;
   }
 
+  section[id],
+  footer[id] {
+    scroll-margin-top: 4.5rem;
+  }
+
   button:not(:disabled),
   a[href],
   select:not(:disabled) {
     cursor: pointer;
+    touch-action: manipulation;
   }
 }
 

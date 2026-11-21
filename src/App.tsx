@@ -10,6 +10,7 @@ import { PortfolioGallery } from './components/PortfolioGallery';
 import { PortfolioSpreadModal } from './components/PortfolioSpreadModal';
 import { ServicesSection } from './components/ServicesSection';
 import type { PortfolioPhoto } from './data/studioData';
+import { scrollToSection } from './utils/navigation';
 
 export default function App() {
   const [activePhotoId, setActivePhotoId] = useState<string | null>(null);
@@ -19,10 +20,7 @@ export default function App() {
     if (serviceTitle) {
       setInquiryTopic(serviceTitle);
     }
-    const contactEl = document.getElementById('contact');
-    if (contactEl) {
-      contactEl.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToSection('#contact');
   };
 
   const handleSelectPhoto = (photo: PortfolioPhoto) => {

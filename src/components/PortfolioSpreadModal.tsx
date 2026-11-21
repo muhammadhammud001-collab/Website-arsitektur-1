@@ -110,7 +110,7 @@ export function PortfolioSpreadModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3, ease: EASE_EDITORIAL }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-0 sm:p-6 lg:p-8"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-0 sm:p-4 lg:p-5 xl:p-8"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               onClose();
@@ -123,7 +123,7 @@ export function PortfolioSpreadModal({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 14, scale: 0.985 }}
             transition={{ duration: 0.45, ease: EASE_EDITORIAL }}
-            className="w-full h-full sm:h-auto max-w-6xl bg-white shadow-2xl flex flex-col lg:grid lg:grid-cols-2 sm:max-h-[92vh] overflow-y-auto lg:overflow-hidden"
+            className="w-full h-full sm:h-auto max-w-5xl xl:max-w-6xl bg-white shadow-2xl flex flex-col lg:grid lg:grid-cols-2 lg:h-[min(92vh,760px)] sm:max-h-[92vh] overflow-y-auto lg:overflow-hidden"
           >
             {/* Mobile sticky top bar so close button is immediately reachable */}
             <div className="flex lg:hidden shrink-0 items-center justify-between px-5 py-3.5 bg-white border-b border-neutral-100 sticky top-0 z-20">
@@ -148,7 +148,7 @@ export function PortfolioSpreadModal({
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.45, delay: 0.04, ease: EASE_EDITORIAL }}
-              className="relative shrink-0 bg-neutral-100 aspect-[4/3] sm:aspect-[16/11] lg:aspect-auto lg:min-h-[660px] overflow-hidden"
+              className="relative shrink-0 bg-neutral-100 aspect-[4/3] sm:aspect-[16/11] lg:aspect-auto lg:h-full lg:min-h-0 overflow-hidden"
             >
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
@@ -170,15 +170,15 @@ export function PortfolioSpreadModal({
               </AnimatePresence>
             </motion.div>
 
-            {/* Right column: Pure white monograph layout staggered 0.08s after left panel */}
+            {/* Right column: Pure white monograph layout fitting laptop & desktop viewports cleanly without bottom clipping */}
             <motion.div
               initial={{ opacity: 0, x: 12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.45, delay: 0.12, ease: EASE_EDITORIAL }}
-              className="relative z-10 shrink-0 lg:shrink bg-white p-5 sm:p-8 lg:p-10 flex flex-col justify-between gap-6 lg:gap-0 lg:min-h-[660px]"
+              className="relative z-10 shrink-0 lg:shrink bg-white p-5 sm:p-7 lg:px-7 lg:py-5 xl:px-10 xl:py-8 flex flex-col justify-between gap-6 lg:gap-4 lg:h-full lg:min-h-0 lg:overflow-y-auto"
             >
               {/* Desktop editorial top bar: Halaman N | Seri | Tutup */}
-              <div className="hidden lg:flex items-center justify-between gap-4 pb-6">
+              <div className="hidden lg:flex shrink-0 items-center justify-between gap-4">
                 <span className="text-xs font-medium text-neutral-800 tabular-nums">
                   Halaman {spread.pageNumber}
                 </span>
@@ -187,16 +187,14 @@ export function PortfolioSpreadModal({
                   {spread.activePhoto.series}
                 </span>
 
-                <motion.button
+                <button
                   type="button"
                   onClick={onClose}
                   aria-label="Tutup tampilan proyek"
-                  whileHover={{ scale: 1.06 }}
-                  whileTap={{ scale: 0.94 }}
-                  className="w-8 h-8 rounded-full border border-neutral-200 text-neutral-700 hover:bg-neutral-950 hover:text-white hover:border-neutral-950 flex items-center justify-center transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
+                  className="w-8 h-8 rounded-full border border-neutral-200 text-neutral-700 hover:bg-neutral-950 hover:text-white hover:border-neutral-950 active:scale-95 flex items-center justify-center transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
                 >
                   <X className="w-4 h-4" aria-hidden="true" />
-                </motion.button>
+                </button>
               </div>
 
               {/* Asymmetric 2-column selectable collage & narrative with directional crossfade */}
@@ -218,16 +216,16 @@ export function PortfolioSpreadModal({
                       initial="enter"
                       animate="center"
                       exit="exit"
-                      className="grid grid-cols-12 gap-4 lg:my-auto"
+                      className="grid grid-cols-12 gap-3.5 xl:gap-4 lg:flex-1 lg:min-h-0"
                     >
                       {/* Inner left column: tall vertical photo + smaller square-ish detail photo below */}
-                      <div className="col-span-6 flex flex-col gap-4">
+                      <div className="col-span-6 flex flex-col gap-3.5 xl:gap-4 lg:h-full lg:min-h-0">
                         {thumbTall && (
                           <button
                             type="button"
                             onClick={() => selectWithDirection(thumbTall.id)}
                             aria-label={`Lihat proyek ${thumbTall.title}`}
-                            className="group relative overflow-hidden bg-neutral-100 aspect-[3/4] w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
+                            className="group relative overflow-hidden bg-neutral-100 aspect-[3/4] lg:aspect-auto lg:flex-[1.45] lg:min-h-[140px] w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
                           >
                             <SafeImage
                               src={thumbTall.image}
@@ -239,12 +237,12 @@ export function PortfolioSpreadModal({
                         )}
 
                         {thumbBottomLeft && (
-                          <div className="pl-5 sm:pl-8">
+                          <div className="pl-5 sm:pl-7 xl:pl-8 lg:flex-1 lg:min-h-[110px]">
                             <button
                               type="button"
                               onClick={() => selectWithDirection(thumbBottomLeft.id)}
                               aria-label={`Lihat proyek ${thumbBottomLeft.title}`}
-                              className="group relative overflow-hidden bg-neutral-100 aspect-square w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
+                              className="group relative overflow-hidden bg-neutral-100 aspect-square lg:aspect-auto lg:h-full w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
                             >
                               <SafeImage
                                 src={thumbBottomLeft.image}
@@ -257,13 +255,13 @@ export function PortfolioSpreadModal({
                       </div>
 
                       {/* Inner right column: landscape photo + medium photo + date & short editorial description */}
-                      <div className="col-span-6 flex flex-col gap-4">
+                      <div className="col-span-6 flex flex-col gap-3 xl:gap-4 lg:h-full lg:min-h-0">
                         {thumbTopRight && (
                           <button
                             type="button"
                             onClick={() => selectWithDirection(thumbTopRight.id)}
                             aria-label={`Lihat proyek ${thumbTopRight.title}`}
-                            className="group relative overflow-hidden bg-neutral-100 aspect-[16/10] w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
+                            className="group relative overflow-hidden bg-neutral-100 aspect-[16/10] lg:aspect-auto lg:flex-[0.95] lg:min-h-[96px] w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
                           >
                             <SafeImage
                               src={thumbTopRight.image}
@@ -278,7 +276,7 @@ export function PortfolioSpreadModal({
                             type="button"
                             onClick={() => selectWithDirection(thumbMidRight.id)}
                             aria-label={`Lihat proyek ${thumbMidRight.title}`}
-                            className="group relative overflow-hidden bg-neutral-100 aspect-[4/3] w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
+                            className="group relative overflow-hidden bg-neutral-100 aspect-[4/3] lg:aspect-auto lg:flex-[1.15] lg:min-h-[110px] w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
                           >
                             <SafeImage
                               src={thumbMidRight.image}
@@ -289,17 +287,17 @@ export function PortfolioSpreadModal({
                         )}
 
                         {/* Short description & date below right photos matching Reference Image 4 */}
-                        <div className="pt-2">
-                          <p className="text-[11px] font-semibold text-neutral-950">
+                        <div className="shrink-0 pt-1">
+                          <p className="text-[11px] font-semibold text-neutral-950 leading-snug">
                             {spread.activePhoto.date} · {spread.activePhoto.title}
                           </p>
                           <p
                             data-testid="spread-description"
-                            className="mt-2 text-xs leading-relaxed text-neutral-700"
+                            className="mt-1.5 text-[11px] xl:text-xs leading-[1.45] xl:leading-relaxed text-neutral-700"
                           >
                             {spread.activePhoto.description}
                           </p>
-                          <p className="mt-3 text-[11px] font-medium text-neutral-900 text-right">
+                          <p className="mt-2 text-[11px] font-medium text-neutral-900 text-right">
                             - {spread.activePhoto.attribution}
                           </p>
                         </div>
@@ -310,7 +308,7 @@ export function PortfolioSpreadModal({
               </AnimatePresence>
 
               {/* Bottom monograph credit & page step controls */}
-              <div className="pt-6 mt-4 flex items-center justify-between gap-4 border-t border-neutral-100">
+              <div className="shrink-0 pt-3 xl:pt-4 flex items-center justify-between gap-4 border-t border-neutral-100">
                 <span className="text-[11px] font-medium tracking-[0.14em] uppercase text-neutral-700">
                   KARYA HORIZON
                 </span>
@@ -319,26 +317,22 @@ export function PortfolioSpreadModal({
                   <span className="text-[11px] text-neutral-400 tabular-nums mr-1">
                     {spread.pageNumber} / {spread.totalPages}
                   </span>
-                  <motion.button
+                  <button
                     type="button"
                     onClick={() => handleStep(-1)}
                     aria-label="Proyek sebelumnya"
-                    whileHover={{ scale: 1.06 }}
-                    whileTap={{ scale: 0.94 }}
-                    className="w-8 h-8 rounded-full border border-neutral-200 text-neutral-700 hover:bg-neutral-950 hover:text-white hover:border-neutral-950 flex items-center justify-center transition-colors duration-150"
+                    className="w-8 h-8 rounded-full border border-neutral-200 text-neutral-700 hover:bg-neutral-950 hover:text-white hover:border-neutral-950 active:scale-95 flex items-center justify-center transition-all duration-150"
                   >
                     <ChevronLeft className="w-4 h-4" aria-hidden="true" />
-                  </motion.button>
-                  <motion.button
+                  </button>
+                  <button
                     type="button"
                     onClick={() => handleStep(1)}
                     aria-label="Proyek berikutnya"
-                    whileHover={{ scale: 1.06 }}
-                    whileTap={{ scale: 0.94 }}
-                    className="w-8 h-8 rounded-full border border-neutral-200 text-neutral-700 hover:bg-neutral-950 hover:text-white hover:border-neutral-950 flex items-center justify-center transition-colors duration-150"
+                    className="w-8 h-8 rounded-full border border-neutral-200 text-neutral-700 hover:bg-neutral-950 hover:text-white hover:border-neutral-950 active:scale-95 flex items-center justify-center transition-all duration-150"
                   >
                     <ChevronRight className="w-4 h-4" aria-hidden="true" />
-                  </motion.button>
+                  </button>
                 </div>
               </div>
             </motion.div>
